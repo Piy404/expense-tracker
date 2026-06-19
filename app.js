@@ -26,9 +26,15 @@ let transactions = [
     }
 ];
 
+// Save transactions to localStorage
+function saveToStorage() {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
 // Delete transaction by ID
 function deleteTransaction(id) {
     transactions = transactions.filter(transaction => transaction.id !== id);
+    saveToStorage();
     renderDOM();
 }
 
@@ -119,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
             };
 
             transactions.push(newTransaction);
+            saveToStorage();
             renderDOM();
 
             // Clear the form inputs after
