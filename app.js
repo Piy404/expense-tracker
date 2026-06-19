@@ -1,30 +1,6 @@
 // Transactions Data Array
-let transactions = [
-    {
-        id: 1,
-        text: "Tamhini Ghat Trek Fuel",
-        amount: 500.00,
-        type: "expense"
-    },
-    {
-        id: 2,
-        text: "Tuition Payment",
-        amount: 12000.00,
-        type: "income"
-    },
-    {
-        id: 3,
-        text: "Hostel Rent",
-        amount: 3500.00,
-        type: "expense"
-    },
-    {
-        id: 4,
-        text: "Freelance Coding project",
-        amount: 5000.00,
-        type: "income"
-    }
-];
+const localStorageTransactions = JSON.parse(localStorage.getItem("transactions"));
+let transactions = localStorageTransactions !== null ? localStorageTransactions : [];
 
 // Save transactions to localStorage
 function saveToStorage() {
