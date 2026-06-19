@@ -1,1 +1,261 @@
-/* style.css */
+/* Design Tokens & Theme Variables */
+:root {
+    --bg-color: #f8fafc; /* Slate 50 */
+    --text-color: #0f172a; /* Slate 900 */
+    --text-muted: #64748b; /* Slate 500 */
+    --card-bg: #ffffff;
+    
+    --primary-color: #6366f1; /* Indigo 500 */
+    --primary-hover: #4f46e5; /* Indigo 600 */
+    
+    --income-color: #10b981; /* Emerald 500 */
+    --income-bg: #ecfdf5; /* Emerald 50 */
+    
+    --expense-color: #ef4444; /* Red 500 */
+    --expense-bg: #fef2f2; /* Red 50 */
+    
+    --border-color: #e2e8f0; /* Slate 200 */
+    --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --border-radius: 12px;
+}
+
+/* Reset Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Main Container */
+.container {
+    width: 100%;
+    max-width: 450px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Header & Balance */
+.tracker-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tracker-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+.balance-container {
+    text-align: center;
+    background-color: var(--bg-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.balance-container h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+}
+
+.balance-container h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+/* Summary Box (Income / Expense) */
+.summary-container {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.summary-box {
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.summary-box.income {
+    background-color: var(--income-bg);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.summary-box.expense {
+    background-color: var(--expense-bg);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.summary-box h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.money {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.money.plus {
+    color: var(--income-color);
+}
+
+.money.minus {
+    color: var(--expense-color);
+}
+
+/* History Section */
+.history-section h3,
+.add-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+/* History List Items */
+.list li {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    position: relative;
+}
+
+.list li.plus {
+    border-right: 5px solid var(--income-color);
+}
+
+.list li.minus {
+    border-right: 5px solid var(--expense-color);
+}
+
+/* Form Controls */
+.form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.form-control label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-control input,
+.form-control select {
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-control input:focus,
+.form-control select:focus {
+    border-color: var(--primary-color);
+}
+
+/* Add Transaction Button */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Responsiveness adjustments */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .balance-container h1 {
+        font-size: 1.8rem;
+    }
+    
+    .summary-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .summary-box {
+        padding: 12px;
+    }
+}
