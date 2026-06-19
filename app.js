@@ -80,5 +80,12 @@ function renderDOM() {
 // Initialize application on DOM load
 document.addEventListener("DOMContentLoaded", () => {
     renderDOM();
+
+    const form = document.getElementById("form");
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+        });
+    }
 });
 
