@@ -67,7 +67,7 @@ function renderDOM() {
         
         li.innerHTML = `
             ${transaction.text}
-            <span>${sign}$${Math.abs(transaction.amount).toFixed(2)}</span>
+            <span>${sign}₹${Math.abs(transaction.amount).toFixed(2)}</span>
             <button class="delete-btn" onclick="deleteTransaction(${transaction.id})">x</button>
         `;
         listEl.appendChild(li);
@@ -80,13 +80,13 @@ function renderDOM() {
     // Update values in DOM
     if (balanceEl) {
         const balanceSign = balance < 0 ? "-" : "";
-        balanceEl.textContent = `${balanceSign}$${Math.abs(balance).toFixed(2)}`;
+        balanceEl.textContent = `${balanceSign}₹${Math.abs(balance).toFixed(2)}`;
     }
     if (moneyPlusEl) {
-        moneyPlusEl.textContent = `+$${income.toFixed(2)}`;
+        moneyPlusEl.textContent = `+₹${income.toFixed(2)}`;
     }
     if (moneyMinusEl) {
-        moneyMinusEl.textContent = `-$${expense.toFixed(2)}`;
+        moneyMinusEl.textContent = `-₹${expense.toFixed(2)}`;
     }
 }
 
