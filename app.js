@@ -1,30 +1,31 @@
 // Transactions Data Array
-const transactions = [
-    {
-        id: 1,
-        text: "Tamhini Ghat Trek Fuel",
-        amount: 500.00,
-        type: "expense"
-    },
-    {
-        id: 2,
-        text: "Tuition Payment",
-        amount: 12000.00,
-        type: "income"
-    },
-    {
-        id: 3,
-        text: "Hostel Rent",
-        amount: 3500.00,
-        type: "expense"
-    },
-    {
-        id: 4,
-        text: "Freelance Coding project",
-        amount: 5000.00,
-        type: "income"
-    }
-];
+const localStorageTransactions = JSON.parse(localStorage.getItem("transactions"));
+let transactions = localStorageTransactions !== null ? localStorageTransactions : [];
+
+// Save transactions to localStorage
+function saveToStorage() {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
+// Delete transaction by ID
+function deleteTransaction(id) {
+    transactions = transactions.filter(transaction => transaction.id !== id);
+    saveToStorage();
+    renderDOM();
+}
+
+// Calculate total income and expense using filter and reduce
+function updateTotals() {
+    const income = transactions
+        .filter(t => t.type === "income")
+        .reduce((sum, t) => sum + t.amount, 0);
+        
+    const expense = transactions
+        .filter(t => t.type === "expense")
+        .reduce((sum, t) => sum + t.amount, 0);
+
+    return { income, expense };
+}
 
 // Dynamic DOM rendering for transactions list and totals
 function renderDOM() {
@@ -48,38 +49,38 @@ function renderDOM() {
         
         li.innerHTML = `
             ${transaction.text}
-            <span>${sign}$${Math.abs(transaction.amount).toFixed(2)}</span>
+            <span>${sign}₹${Math.abs(transaction.amount).toFixed(2)}</span>
+            <button class="delete-btn" onclick="deleteTransaction(${transaction.id})">x</button>
         `;
         listEl.appendChild(li);
     });
 
-    // Calculate totals
-    const income = transactions
-        .filter(t => t.type === "income")
-        .reduce((sum, t) => sum + t.amount, 0);
-        
-    const expense = transactions
-        .filter(t => t.type === "expense")
-        .reduce((sum, t) => sum + t.amount, 0);
-        
+    // Calculate totals using updateTotals()
+    const { income, expense } = updateTotals();
     const balance = income - expense;
 
     // Update values in DOM
     if (balanceEl) {
         const balanceSign = balance < 0 ? "-" : "";
-        balanceEl.textContent = `${balanceSign}$${Math.abs(balance).toFixed(2)}`;
+        balanceEl.textContent = `${balanceSign}₹${Math.abs(balance).toFixed(2)}`;
     }
     if (moneyPlusEl) {
-        moneyPlusEl.textContent = `+$${income.toFixed(2)}`;
+        moneyPlusEl.textContent = `+₹${income.toFixed(2)}`;
     }
     if (moneyMinusEl) {
-        moneyMinusEl.textContent = `-$${expense.toFixed(2)}`;
+        moneyMinusEl.textContent = `-₹${expense.toFixed(2)}`;
     }
+}
+
+// Init function to hydrate state and render initial data
+function init() {
+    renderDOM();
+    updateTotals();
 }
 
 // Initialize application on DOM load
 document.addEventListener("DOMContentLoaded", () => {
-    renderDOM();
+    init();
 
     const form = document.getElementById("form");
     if (form) {
@@ -106,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
             };
 
             transactions.push(newTransaction);
+            saveToStorage();
             renderDOM();
 
             // Clear the form inputs after
