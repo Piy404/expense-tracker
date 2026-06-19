@@ -179,7 +179,28 @@ body {
     border-right: 5px solid var(--expense-color);
 }
 
-/* Form Controls */
+.delete-btn {
+    cursor: pointer;
+    background-color: var(--expense-color);
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    padding: 3px 7px;
+    border-radius: 4px;
+    opacity: 0;
+    position: absolute;
+    right: 15px;
+    transition: all 0.2s ease;
+}
+
+.list li:hover .delete-btn {
+    opacity: 1;
+}
+
+.list li span {
+    margin-right: 25px;
+}
 .form-control {
     display: flex;
     flex-direction: column;

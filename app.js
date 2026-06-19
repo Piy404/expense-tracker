@@ -1,5 +1,5 @@
 // Transactions Data Array
-const transactions = [
+let transactions = [
     {
         id: 1,
         text: "Tamhini Ghat Trek Fuel",
@@ -26,6 +26,12 @@ const transactions = [
     }
 ];
 
+// Delete transaction by ID
+function deleteTransaction(id) {
+    transactions = transactions.filter(transaction => transaction.id !== id);
+    renderDOM();
+}
+
 // Dynamic DOM rendering for transactions list and totals
 function renderDOM() {
     const listEl = document.getElementById("list");
@@ -49,6 +55,7 @@ function renderDOM() {
         li.innerHTML = `
             ${transaction.text}
             <span>${sign}$${Math.abs(transaction.amount).toFixed(2)}</span>
+            <button class="delete-btn" onclick="deleteTransaction(${transaction.id})">x</button>
         `;
         listEl.appendChild(li);
     });
