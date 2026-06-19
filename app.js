@@ -73,15 +73,8 @@ function renderDOM() {
         listEl.appendChild(li);
     });
 
-    // Calculate totals
-    const income = transactions
-        .filter(t => t.type === "income")
-        .reduce((sum, t) => sum + t.amount, 0);
-        
-    const expense = transactions
-        .filter(t => t.type === "expense")
-        .reduce((sum, t) => sum + t.amount, 0);
-        
+    // Calculate totals using updateTotals()
+    const { income, expense } = updateTotals();
     const balance = income - expense;
 
     // Update values in DOM
