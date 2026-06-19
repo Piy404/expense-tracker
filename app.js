@@ -85,6 +85,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (form) {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
+
+            const textInput = document.getElementById("text");
+            const amountInput = document.getElementById("amount");
+            const typeInput = document.getElementById("type");
+
+            if (!textInput || !amountInput || !typeInput) return;
+
+            const text = textInput.value.trim();
+            const amount = parseFloat(amountInput.value);
+            const type = typeInput.value;
+
+            if (text === "" || isNaN(amount) || type === "") return;
+
+            const newTransaction = {
+                id: Date.now(),
+                text: text,
+                amount: amount,
+                type: type
+            };
+
+            transactions.push(newTransaction);
+            renderDOM();
+
+            // Clear the form inputs after
+            form.reset();
         });
     }
 });
