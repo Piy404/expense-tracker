@@ -72,9 +72,15 @@ function renderDOM() {
     }
 }
 
+// Init function to hydrate state and render initial data
+function init() {
+    renderDOM();
+    updateTotals();
+}
+
 // Initialize application on DOM load
 document.addEventListener("DOMContentLoaded", () => {
-    renderDOM();
+    init();
 
     const form = document.getElementById("form");
     if (form) {
